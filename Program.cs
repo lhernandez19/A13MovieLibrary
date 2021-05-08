@@ -1,5 +1,7 @@
 ﻿using System;
+using A13MovieLibrary.Data;
 using A13MovieLibrary.Menus;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace A13MovieLibrary
 {
@@ -7,12 +9,19 @@ namespace A13MovieLibrary
     {
         static void Main(string[] args)
         {
-            
-            var menu = new Menu();
+            Console.WriteLine("\nWelcome to WCTC movie library!\n");
+
+             var serviceProvider = new ServiceCollection()
+                .AddSingleton<IRepository, Repository>()
+                .AddSingleton<IContext, Contexts>()
+                .AddSingleton<IMenu, Menu>()
+                .BuildServiceProvider();
+
+            var menu = serviceProvider.GetService<IMenu>();
+
             menu.DisplayMenu();
-
-            Console.WriteLine("Thanks for using the Movie Library!");
-
+        
+            Console.WriteLine("\nThank you for using the movie library!\n");
         }
     }
 }

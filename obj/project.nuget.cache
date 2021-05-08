@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "o8DLwKK56CDJtOt8zAjbkzcJpItvC0DL7uk79iaSklKKsP7aTplTsdOFTQuNpMn7aJ9I3tsTJ54VtzbjDYDg4Q==",
+  "dgSpecHash": "aYeKnQ41vc2NGhbwPj0ckGjiKhpg691eKH44RpJYC7KbA8/7uVVQ193lNxTwHetp/9TnJ1DE57jGRsR4YJL2dg==",
   "success": true,
   "projectFilePath": "/Users/luisdiego/Documents/WCTC/SpringTerm2/NetDabase/A13MovieLibrary/A13MovieLibrary.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,9 @@
     "/Users/luisdiego/.nuget/packages/microsoft.win32.registry/4.7.0/microsoft.win32.registry.4.7.0.nupkg.sha512",
     "/Users/luisdiego/.nuget/packages/microsoft.win32.systemevents/4.7.0/microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "/Users/luisdiego/.nuget/packages/newtonsoft.json/10.0.1/newtonsoft.json.10.0.1.nupkg.sha512",
+    "/Users/luisdiego/.nuget/packages/nlog/4.7.9/nlog.4.7.9.nupkg.sha512",
+    "/Users/luisdiego/.nuget/packages/nlog.extensions.logging/1.7.2/nlog.extensions.logging.1.7.2.nupkg.sha512",
+    "/Users/luisdiego/.nuget/packages/nlog.web.aspnetcore/4.12.0/nlog.web.aspnetcore.4.12.0.nupkg.sha512",
     "/Users/luisdiego/.nuget/packages/runtime.native.system/4.3.0/runtime.native.system.4.3.0.nupkg.sha512",
     "/Users/luisdiego/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/Users/luisdiego/.nuget/packages/system.collections.concurrent/4.3.0/system.collections.concurrent.4.3.0.nupkg.sha512",
