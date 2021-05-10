@@ -8,5 +8,6 @@ namespace A13MovieLibrary.Data
         void EditOneMovie();
         void DeleteOneMovie();
         void AddOneUser();
+        void RatingOneMovie();
     }
 }

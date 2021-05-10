@@ -38,5 +38,9 @@ namespace A13MovieLibrary.Data
         {
             _respository.SearchOne();
         }
+        public void RatingOneMovie()
+        {
+            _respository.RatingMovie();
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using A13MovieLibrary.Context;
 using A13MovieLibrary.DataModels;
@@ -31,15 +32,22 @@ namespace A13MovieLibrary.Data
             using(var db = new MovieContext())
             {
                 var foundMovie = db.Movies.Where(m => m.Title.Contains(mTitle));
-
-                if(foundMovie.Count() < 1)
+                
+                do
                 {
-                    Console.WriteLine("\nRecord not found");
-                }
+                    if(foundMovie.Count() < 1)
+                    {
+                        Console.WriteLine("\nRecord not found");
+                    
+                        Console.Write("\nSearch by movie title: ");
+                        mTitle = Console.ReadLine().ToLower();
+                    }
+
+                } while (foundMovie.Count() == 0);
 
                 foreach (var movie in foundMovie)
                 {
-                    Console.WriteLine($"\nMovie found: Id - {movie.Id, -5} | Title - {movie.Title, -10} | Release Date - {movie.ReleaseDate, -15}");
+                    Console.WriteLine($"\n Movie found: Id - {movie.Id, -5} | Title - {movie.Title, -10} | Release Date - {movie.ReleaseDate, -15}");
                 }
             }
         }
@@ -60,7 +68,7 @@ namespace A13MovieLibrary.Data
                     ReleaseDate = Convert.ToDateTime(mReleseDate)
                 };    
 
-                Console.WriteLine($"\nMovie added: Title - {movie.Title, -10} | Release Date - {movie.ReleaseDate, -20}");            
+                Console.WriteLine($"\n Movie added: Title - {movie.Title, -10} | Release Date - {movie.ReleaseDate, -20}");            
 
                 db.Movies.Add(movie);
                 db.SaveChanges();
@@ -86,7 +94,7 @@ namespace A13MovieLibrary.Data
                 foundMovie.Title = newTitle;
                 foundMovie.ReleaseDate = Convert.ToDateTime(newReleaseDate);
 
-                Console.WriteLine($"\nMovie to update: Id - {foundMovie.Id, -5} | Title - {foundMovie.Title, -10} | Release Date - {foundMovie.ReleaseDate, -15}");
+                Console.WriteLine($"\n Movie to update: Id - {foundMovie.Id, -5} | Title - {foundMovie.Title, -10} | Release Date - {foundMovie.ReleaseDate, -15}");
 
                 db.Movies.Update(foundMovie);
                 db.SaveChanges(); 
@@ -117,7 +125,7 @@ namespace A13MovieLibrary.Data
                     db.Movies.Remove(foundMovie);
                     db.SaveChanges(); 
 
-                    Console.WriteLine($"\nThe movie {foundMovie.Title} was deleted!");
+                    Console.WriteLine($"\n The movie {foundMovie.Title} was deleted!");
             }  
         }
 
@@ -160,7 +168,60 @@ namespace A13MovieLibrary.Data
 
                 var userDetails = db.Users.Include(ud => ud.Occupation).Where(ud => ud.Id == newUserId).FirstOrDefault();
 
-                Console.WriteLine($"\nNew user details: Id - {userDetails.Id} | Gender - {userDetails.Gender} | ZipCode - {userDetails.ZipCode} | Occupation - {userDetails.Occupation.Name}");
+                Console.WriteLine($"\n New user details: Id - {userDetails.Id} | Gender - {userDetails.Gender} | ZipCode - {userDetails.ZipCode} | Occupation - {userDetails.Occupation.Name}");
+            }
+        }
+
+        public void RatingMovie()
+        {
+            using (var db = new MovieContext()) 
+            { 
+                Console.Write("\nEnter the user Id that will rate the movie: ");
+                var userId = Int64.Parse(Console.ReadLine());
+
+                var mTitle = "";
+
+                var userFound = db.Users.Where(u => u.Id == userId); 
+                
+                do
+                {
+                    if(userFound.Count() < 1)
+                    {
+                        Console.WriteLine("\nRecord not found");
+                    
+                        Console.Write("\nEnter the user Id that will rate the movie: ");
+                        userId = Int64.Parse(Console.ReadLine());
+                    }
+
+                } while (userFound.Count() == 0);
+
+                var userFound2 = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+                Console.Write("\nEnter the movie that will be rated:  ");
+                mTitle = Console.ReadLine();
+
+                var movieFound = db.Movies.FirstOrDefault(m=>m.Title == mTitle );
+
+                Console.Write("\nHow do you rate the movie?  ");
+                var mRate = Int64.Parse(Console.ReadLine());
+
+                var userMovie = new UserMovie()
+                {
+                    Rating = mRate,
+                    RatedAt = DateTime.Now,
+                    User = userFound2,
+                    Movie = movieFound
+                };
+
+                var userMovies = new List<UserMovie>();
+                userMovies.Add(userMovie);
+                
+                db.UserMovies.Add(userMovie);
+
+                db.SaveChanges();
+                
+                Console.WriteLine($"\n User Id: {userMovie.User.Id} | Movie title: {userMovie.Movie.Title} | Movie rating: {userMovie.Rating}");
+
             }
         }
     }

@@ -40,7 +40,10 @@ namespace A13MovieLibrary.Menus
                     _context.AddOneUser();
                     break;
                     case "6": // Delete movie
-                    _context.DeleteOneMovie();
+                    _context.RatingOneMovie();
+                    break;
+                    case "7": // Delete movie
+                    _context.RatingOneMovie();
                     break;
                 }
             } while (menuSelection != "7");
@@ -55,7 +58,8 @@ namespace A13MovieLibrary.Menus
             Console.WriteLine("4. Display a specific Movie - (Search)");
             Console.WriteLine("5. Add new user - including occupation - (Create)");
             Console.WriteLine("6. Delete Movie - (Delete)");
-            Console.WriteLine("7. Exit\n");
+            Console.WriteLine("7. Rate movie");
+            Console.WriteLine("8. Exit\n");
         }
 
     }
