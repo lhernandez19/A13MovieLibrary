@@ -40,13 +40,13 @@ namespace A13MovieLibrary.Menus
                     _context.AddOneUser();
                     break;
                     case "6": // Delete movie
-                    _context.RatingOneMovie();
+                    _context.DeleteOneMovie();
                     break;
                     case "7": // Delete movie
                     _context.RatingOneMovie();
                     break;
                 }
-            } while (menuSelection != "7");
+            } while (menuSelection != "8");
         }
         
         public void ActionMenu()
